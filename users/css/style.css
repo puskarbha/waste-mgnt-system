@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+:root{
+   --main-color:#1E1E1E;
+   --green:#165853;
+   --lightgreen:#3ce7d9;
+   --black:#333;
+   --pink:#ada8a8;
+   --white:#fff;
+   --light-color:#666;
+   --light-bg:#eee;
+   --border:0rem solid var(--black);
+   --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+*{
+   font-family: 'Inter', sans-serif;
+   /* margin:0; padding:0; */
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+}
+
+.userpage{
+    
+    width: auto;
+}
+nav{
+    margin-top: 20px ;
+    text-align: center;
+    padding: 5px 0;
+}
+nav .logo{
+    display: inline;
+    padding-right: 500px;
+}
+nav a{
+    font-weight: bold;
+    padding: 0 30px;
+    color: var(--green);
+}
+nav a:hover{
+    color: var(--lightgreen);
+}
+.userpage a{
+    background-color: var(--green);
+    color:#eee;
+    border: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    
+}
+.userpage a:hover{
+    background-color: var(--lightgreen);
+    color:var(--green);
+    
+}
+
+.userpage{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+/* table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+ tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+  
+tr:hover {
+    background-color: #ddd;
+}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  } */
+
+  
+    /* Style the form element */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 400px;
+    }
+
+    /* Style the label elements */
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Style the input elements */
+    input[type="email"],
+    input[type="password"] {
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* Style the submit button on hover */
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+
