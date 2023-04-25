@@ -64,5 +64,5 @@ if(!isset($_SESSION['user']))
 </div>
         </form>
     </div>
-    </div>
+    
 <?php include('layout/footer.php'); ?>

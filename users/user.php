@@ -97,7 +97,9 @@ echo' <a href="partials/loginPage.php">Log In</a>
     
         </div>
 <!-- Notices panel -->
+<h1 align="center">Weekly notices</h1>
 <div class='container'>
+    
 <?php
     $sql = "SELECT * FROM `notice` ";
     $result = mysqli_query($conn,$sql);
