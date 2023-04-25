@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2023 at 01:48 PM
+-- Generation Time: Apr 25, 2023 at 05:18 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(20) NOT NULL,
+  `admin_name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `password`) VALUES
+(1, 'bhim', 'bhim@gmail.com', '123456');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admins`
 --
 
@@ -34,6 +54,63 @@ CREATE TABLE `admins` (
   `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `adminName`, `email`, `password`) VALUES
+(1, 'peter', 'peter@gmai.com', '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `cat_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `slug` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`cat_id`, `name`, `description`, `slug`) VALUES
+(2, 'schedule', 'It show sports related news', 'sports'),
+(4, 'billing', 'It shows news related to the economics', 'eco'),
+(7, 'policy', 'It show weather related news', 'weather'),
+(16, 'vacency', 'Health is Wealth', 'health');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notice`
+--
+
+CREATE TABLE `notice` (
+  `nid` int(11) NOT NULL,
+  `category` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `description` varchar(5000) NOT NULL,
+  `image` varchar(2000) NOT NULL,
+  `date` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notice`
+--
+
+INSERT INTO `notice` (`nid`, `category`, `title`, `slug`, `description`, `image`, `date`) VALUES
+(42, 4, 'Price increases', 'price2020', 'we recently increased the price of our billing system due to change in governmaent policies. Know more in the link below', '1682357802.png', '2023-04-24 23:16:55'),
+(45, 2, 'Important Notice - Changes to Trash Collection Schedule', 'trash-collection-schedule-changes', 'Starting next week, there will be changes to the trash collection schedule in your area. Please read on for more information', '1682392106.jpg', '2023-04-25 08:53:26'),
+(46, 7, 'Recycling Guidelines Update', 'recycling-guidelines-update', 'We have updated our recycling guidelines to include new items that can be recycled. Please take note of these changes to ensure proper recycling.', '1682392191.png', '2023-04-25 08:54:51'),
+(47, 7, 'Reduce Food Waste with Composting', 'composting-for-food-waste', 'Did you know that you can reduce food waste and help the environment by composting? Learn how to get started with our guide.', '1682392355.jpg', '2023-04-25 08:57:35'),
+(48, 7, 'Trash and Recycling Bin Placement Guidelines', 'bin-placement-guidelines', 'Proper placement of your trash and recycling bins can help ensure efficient collection and avoid delays. Review our guidelines to avoid issues.\r\n', '1682392429.jpg', '2023-04-25 08:58:49');
+
 -- --------------------------------------------------------
 
 --
@@ -41,6 +118,7 @@ CREATE TABLE `admins` (
 --
 
 CREATE TABLE `pickup` (
+  `pickup_id` int(11) NOT NULL,
   `user_id` int(20) NOT NULL,
   `type` varchar(25) NOT NULL,
   `weight` int(8) NOT NULL,
@@ -48,36 +126,18 @@ CREATE TABLE `pickup` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `order_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status` varchar(20) NOT NULL DEFAULT 'Unverified'
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pickup`
 --
 
-INSERT INTO `pickup` (`user_id`, `type`, `weight`, `location`, `date`, `time`, `order_time`, `status`) VALUES
-(1, 'plastic', 2, 'patan', '2023-01-31', '17:22:00', '2023-02-04 08:39:05', 'Unverified'),
-(1, 'plastic', 13, 'gug', '2023-02-21', '20:25:00', '2023-02-04 08:40:52', 'Unverified'),
-(1, 'plastic', 1, 'gug', '2023-02-21', '02:03:00', '2023-02-04 08:41:42', 'Unverified'),
-(1, 'plastic', -3, 'gug', '2023-02-28', '14:34:00', '2023-02-04 08:44:55', 'Unverified'),
-(1, '', 0, '', '0000-00-00', '00:00:00', '2023-02-04 08:45:21', 'Unverified'),
-(1, 'others', 12, 'hawA', '2023-02-14', '19:32:00', '2023-02-04 08:47:16', 'Unverified'),
-(1, 'Medical', 5, 'lakitpur', '2023-02-03', '22:11:00', '2023-02-09 07:27:00', 'Unverified'),
-(1, 'paper', 2, 'khapinche', '2023-03-07', '18:14:00', '2023-02-09 07:29:22', 'Unverified'),
-(1, 'paper', 4, 'basa', '2023-02-27', '18:44:00', '2023-02-09 08:59:48', 'Unverified'),
-(1, 'plastic', 4, 'patan', '2023-02-13', '14:50:00', '2023-02-09 09:00:58', 'Unverified'),
-(1, 'plastic', 4, 'nayatol', '2023-02-07', '14:53:00', '2023-02-09 09:04:20', 'Unverified'),
-(1, 'others', 4, 'patandhoka', '2023-02-10', '20:51:00', '2023-02-09 09:06:16', 'Unverified'),
-(1, 'plastic', -1, 'gug', '2023-02-26', '14:58:00', '2023-02-09 09:07:36', 'Unverified'),
-(1, 'plastic', -1, 'lakitpur', '2023-02-22', '15:05:00', '2023-02-09 09:16:02', 'Unverified'),
-(0, 'Electronics', 88, 'butwal', '2023-03-09', '15:24:00', '2023-02-09 09:35:16', 'Unverified'),
-(0, 'plastic', 1, 'lakitpur', '2023-02-21', '20:22:00', '2023-02-09 09:37:28', 'Unverified'),
-(3, 'Metal', -1, 'lakitpur', '2023-03-01', '17:24:00', '2023-02-09 09:39:40', 'Unverified'),
-(11, 'plastic', 0, '', '0000-00-00', '00:00:00', '2023-02-21 03:29:08', 'Unverified'),
-(12, 'plastic', 455, 'imadol', '2023-02-25', '12:18:00', '2023-02-21 06:33:53', 'Unverified'),
-(12, 'Medical', 100, 'patan', '2023-02-01', '12:23:00', '2023-02-21 06:34:40', 'Unverified'),
-(12, 'paper', 45, '78', '2023-02-09', '15:22:00', '2023-02-21 06:37:19', 'Unverified'),
-(12, 'plastic', 78, 'gug', '2023-01-31', '12:29:00', '2023-02-21 06:38:10', 'Unverified');
+INSERT INTO `pickup` (`pickup_id`, `user_id`, `type`, `weight`, `location`, `date`, `time`, `order_time`, `status`) VALUES
+(27, 1, 'plastic', 454, 'fljdefjde', '2023-03-28', '19:15:00', '2023-04-24 13:27:59', 'Unverified'),
+(28, 1, 'plastic', 78, 'gug', '2023-04-13', '22:13:00', '2023-04-24 14:49:33', 'picked'),
+(30, 2, 'plastic', 1, 'gug', '2023-04-06', '19:17:00', '2023-04-24 13:30:00', 'Unverified'),
+(31, 2, 'plastic', 6, 'khapinche', '2023-04-21', '19:17:00', '2023-04-24 13:30:20', 'Unverified');
 
 -- --------------------------------------------------------
 
@@ -90,7 +150,7 @@ CREATE TABLE `user` (
   `username` varchar(25) NOT NULL,
   `address` varchar(40) NOT NULL,
   `email` varchar(25) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(300) NOT NULL,
   `photo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -99,17 +159,45 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `address`, `email`, `password`, `photo`) VALUES
-(12, 'puskar', 'imadol', 'puskarbha@gmail.com', '$2y$10$OR5yV148ZQxrLUBmUBWXRex8DsUlN6kNgORv9pd5a1SmWAvkxT57W', 'IMG_20221220_112705.jpg');
+(1, 'puskar', 'imadol', 'puskarbha@gmail.com', '$2y$10$VAlVC5L3dWVTCwx5/kZ8z.lK6XjCB.jrp4NrItO/NpF42yvukBl6y', 'Screenshot (1).png'),
+(2, 'ramesh', 'imadol', 'ramesh@gmail.com', '$2y$10$AVsIDUVQssannN20ZAwqruvMoaL4/edbDtIKeGL1st9vBpazOQZMO', 'Screenshot 2023-04-02 162309.p');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`cat_id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `notice`
+--
+ALTER TABLE `notice`
+  ADD PRIMARY KEY (`nid`),
+  ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indexes for table `pickup`
+--
+ALTER TABLE `pickup`
+  ADD PRIMARY KEY (`pickup_id`);
 
 --
 -- Indexes for table `user`
@@ -122,16 +210,40 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `notice`
+--
+ALTER TABLE `notice`
+  MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `pickup`
+--
+ALTER TABLE `pickup`
+  MODIFY `pickup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
